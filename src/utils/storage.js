@@ -4,7 +4,7 @@ export const getItem = name=>{
     const data = window.localStorage.getItem(name)
     try{
         return JSON.parse(data)
-    }catch(err){
+    }catch{
         //如果不是Json字符串则原样返回
         return data
     }

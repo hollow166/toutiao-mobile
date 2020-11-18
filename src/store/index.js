@@ -6,7 +6,7 @@ Vue.use(Vuex);
 const userKey = 'toutiao-user'
 export default new Vuex.Store({
   state: {
-    user:getItem(userKey)//当前用户的登录状态（token
+    user:getItem(userKey)//当前用户的登录状态（token)
   },
   mutations: {
     setUser(state,data){
