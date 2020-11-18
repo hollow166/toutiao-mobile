@@ -28,3 +28,11 @@ export const getCurrentUserInfo = ()=>{
         // }
     })
 }
+
+//获取用户频道数据
+export const getUserChannels = ()=>{
+    return http({
+        methos:'get',
+        url:'/app/v1_0/user/channels'
+    })
+}

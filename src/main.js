@@ -12,6 +12,8 @@ import 'amfe-flexible';
 Vue.use(Vant)
 //加载全局样式
 import "../src/styles/index.css";
+
+import './utils/day'//处理时间
 Vue.config.productionTip = false;
 
 new Vue({
