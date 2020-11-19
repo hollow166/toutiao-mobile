@@ -11,7 +11,7 @@
             v-for='(article,index) in articlesList'
             :key='index'
             :article='article'
-        >首页</article-item>
+        ></article-item>
         <!-- <van-cell
           v-for="(article, index) in articlesList"
           :key="index"

@@ -2,7 +2,7 @@
 import axios from 'axios'
 import store from '../store'
 const http = axios.create({
-    baseURL:"http://ttapi.research.itcast.cn/"
+    baseURL:"/api"
 })
 
 //请求拦截器

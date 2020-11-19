@@ -84,7 +84,7 @@ export default {
         this.$router.back()
       } catch (err) {
         console.log(err);
-        this.$toast.success("登录失败，手机哈或验证码错误");
+        this.$toast.success("登录失败，手机号或验证码错误");
       }
     },
     onFailed(error){
