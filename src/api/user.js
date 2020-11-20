@@ -32,7 +32,27 @@ export const getCurrentUserInfo = ()=>{
 //获取用户频道数据
 export const getUserChannels = ()=>{
     return http({
-        methos:'get',
+        method:'get',
         url:'/app/v1_0/user/channels'
+    })
+}
+
+
+//关注用户
+export const addFollow =userId=>{
+    return http({
+        method:'post',
+        url:'/app/v1_0/user/followings',
+        data:{
+            target:userId
+        }
+    })
+}
+
+//取消用户关注
+export const delFollow = userId=>{
+    return http({
+        method:'DELETE',
+        url:`/app/v1_0/user/followings/${userId}`
     })
 }

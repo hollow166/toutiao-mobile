@@ -1,8 +1,18 @@
 //请求模块
 import axios from 'axios'
 import store from '../store'
+import JSONbig from 'json-bigint'
 const http = axios.create({
-    baseURL:"/api"
+    baseURL:"/api",
+    transformResponse:[function(data){
+      try{
+        return JSONbig.parse(data)
+      }catch(err){
+        // console.log('转换失败',err)
+        return data
+      }
+    }],
+    
 })
 
 //请求拦截器

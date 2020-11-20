@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.9.6",
     "http-proxy-middleware": "^1.0.6",
+    "json-bigint": "^1.0.0",
     "lodash": "^4.17.20",
     "postcss-pxtorem": "^5.1.1",
     "vant": "^2.7.1",
