@@ -56,3 +56,33 @@ export const delFollow = userId=>{
         url:`/app/v1_0/user/followings/${userId}`
     })
 }
+
+//获取用户信息
+export const getUserInfo = ()=>{
+    return http({
+        method:'get',
+        url:'/app/v1_0/user/profile',
+
+    })
+}
+
+
+
+//修改用户个人资料
+export const upUserInfo = data=>{
+    return http({
+        method:'patch',
+        url:'/app/v1_0/user/profile',
+        data
+    })
+}
+
+
+//编辑用户头像
+export const editUserAvatar = data=>{
+    return http({
+        method:'patch',
+        url:'/app/v1_0/user/photo',
+        data
+    })
+}

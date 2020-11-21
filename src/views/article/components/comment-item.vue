@@ -25,7 +25,7 @@
         <span class="pubdate">{{
           comment.pubdate | datetime("YYYY-MM-DD HH:mm")
         }}</span>
-        <van-button round size="mini" class="replay-btn"
+        <van-button round size="mini" class="replay-btn" @click="$emit('reply-comment',comment)"
           >{{ comment.reply_count }} 回复</van-button
         >
       </div>

@@ -49,6 +49,11 @@ const routes = [
     name:"article",
     component:()=>import('../views/article/index.vue'),
     props:true
+  },
+  {
+    path:'/user/Info',
+    name:"userInfo",
+    component:()=>import('../views/userInfo/index.vue')
   }
 ];
 

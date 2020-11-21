@@ -40,16 +40,20 @@
         ref="articleInfo-content"
       ></div>
       <!--文章评论列表-->
-      <comment-list :source="articleId" :list="commentsLsit"></comment-list>
+      <comment-list 
+        :source="articleId" 
+        :list="commentsLsit" 
+        @update-total-count="totalCommentCount = $event "
+        @reply-click="onReplyClick"
+      ></comment-list>
       <!--文章评论列表-->
     </div>
-
     <!--文章底部区域-->
     <div class="comment-container">
       <van-button class="coomment-btn" type="default" round size="small" @click="isPostShow = true"
         >写评论</van-button
       >
-      <van-icon name="comment-o" info="123" color="#777"> </van-icon>
+      <van-icon name="comment-o" :info="totalCommentCount" color="#777"> </van-icon>
       <van-icon
         :name="articleInfo.is_collected ? 'star' : 'star-o'"
         :color="articleInfo.is_collected ? 'yellow' : '#777'"
@@ -75,6 +79,23 @@
       </van-popup>
     </div>
     <!--发布评论-->
+
+    <!-- 评论回复 -->
+    <div>
+      <van-popup
+        v-model="isCommentShow"
+        position="bottom"
+      >
+        <comment-reply 
+          :comment="commentReply"
+          @close="isCommentShow = false"
+          v-if=" isCommentShow"
+          :articleId="articleId"
+         ></comment-reply>
+      </van-popup>
+    </div>
+    <!-- 评论回复 -->
+
   </div>
 </template>
 
@@ -85,13 +106,14 @@ import { ImagePreview } from "vant";
 import { getArticleInfo } from "../../api/articles";
 import { delFollow, addFollow } from "../../api/user";
 import postComment from '../article/components/post-comment'
+import commentReply from '../article/components/comment_-reply'
 import {
   addCollection,
   delCollection,
   addLike,
   delLike,
 } from "../../api/articles";
-import PostComment from './components/post-comment.vue';
+
 export default {
   name: "articleIndex",
   props: {
@@ -103,7 +125,8 @@ export default {
   components: {
     commentList,
     postComment,
-    PostComment
+    commentReply,
+
   },
   created() {
     this.loadArticleInfo();
@@ -114,7 +137,10 @@ export default {
       isFollowLoading: false, //控制按钮加载状态
       isCollectLoading: false,
       isPostShow:false,//弹出层的控制
-      commentsLsit:[]//文章评论列表数组
+      isCommentShow:false,//评论回复弹出层的回复
+      commentsLsit:[],//文章评论列表数组
+      totalCommentCount:0,//评论的总数
+      commentReply:{}
     };
   },
   methods: {
@@ -202,7 +228,15 @@ export default {
     //监听评论发表成功的事件
     onPostSuccess(comment){
         this.commentsLsit.unshift(comment)
+        this.totalCommentCount++
         this.isPostShow = false
+    },
+
+    //监听评论列表项里的回复按钮点击事件
+    onReplyClick(comment){
+      this.isCommentShow = true
+      // console.log(comment)
+      this.commentReply = comment
     }
   },
 };

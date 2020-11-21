@@ -12,6 +12,7 @@
             v-for="(comment,index) in list"
             :key="index"
             :comment='comment'
+            @reply-comment="$emit('reply-click',$event)"
         ></comment-item>
     </van-list>
   </div>
@@ -26,6 +27,12 @@ export default {
       source:{
           type:[String,Number,Object],
           required:true
+      },
+      //获取文章评论 使用 a
+      //获取评论 使用 c
+      type:{
+        type:String,
+        default:'a'
       },
       list:{
           type:Array,
@@ -49,11 +56,13 @@ export default {
     async onLoad() {
         //1.
         const{data}= await getComments({
-            type:'a',
-            source:this.source,
+            type:this.type,
+            source:this.source.toString(),
             offset:this.offset,
             limit:this.limit
         })
+        //获取到评论的数量并通过$emit触发update-total-count事件来传给父组件
+        this.$emit('update-total-count',data.data.total_count)
         //2.
         const{results} = data.data
         this.list.push(...results)
