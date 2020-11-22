@@ -1,7 +1,10 @@
 <template>
     <div class='layout'>
         <!--子路由出口-->
-        <router-view></router-view>
+        <keep-alive >
+            <router-view></router-view>
+        </keep-alive>
+        
         <!--底部导航栏-->
         <van-tabbar v-model="active" route>
         <van-tabbar-item icon="home-o" to='/'>首页</van-tabbar-item>
@@ -19,6 +22,9 @@ export default {
         return{
             active:0
         }
+    },
+    mounted(){
+      
     }
 }
 </script>

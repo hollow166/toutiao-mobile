@@ -1,5 +1,5 @@
 <template>
-  <div class="article-list">
+  <div class="article-list" ref='article-list'>
     <van-pull-refresh v-model="isRefreshLoading" @refresh="onRefresh" animation-duration='400'>
       <van-list
         v-model="loading"
@@ -25,6 +25,7 @@
 <script>
 import { getArticles } from "../api/articles";
 import articleItem from '../components/common/article-item'
+import {debounce} from 'lodash'
 export default {
   name: "articleList",
   props: {
@@ -36,6 +37,15 @@ export default {
   components:{
       articleItem
   },
+  mounted(){
+    const articleList =  this.$refs['article-list']
+    articleList.onscroll=debounce(()=>{
+      this.scrollTop = articleList.scrollTop
+    },30)
+  },
+  activated() {
+    this.$refs['article-list'].scrollTop = this.scrollTop
+  },
   data() {
     return {
       articlesList: [], //文章数据列表
@@ -44,6 +54,7 @@ export default {
       timeStamp: null, //获取下一页数据时间戳
       isRefreshLoading: false, //下拉刷新的loading状态
       refreshText: "",
+      scrollTop:0,//列表滚动的距离
     };
   },
   methods: {

@@ -54,7 +54,8 @@ const routes = [
     path:'/user/Info',
     name:"userInfo",
     component:()=>import('../views/userInfo/index.vue')
-  }
+  },
+
 ];
 
 const router = new VueRouter({
